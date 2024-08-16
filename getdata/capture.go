@@ -3,6 +3,8 @@ package getdata
 import (
 	"sync"
 	"time"
+
+	"fyne.io/fyne/v2/data/binding"
 )
 
 // 抓包的基本设置
@@ -24,3 +26,6 @@ func NewCatcher(device string) *Catcher {
 		Device:   device,
 	}
 }
+
+// 创建一个字符串绑定，用于显示抓包数量
+var StrBind = binding.NewString()

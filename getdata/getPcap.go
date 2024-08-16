@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/google/gopacket"
@@ -77,7 +78,10 @@ func DumpToPcap(filepath string, catcher *Catcher, stopCaptureChan chan bool) {
 		// 写入数据包到 pcap 文件的代码
 		fmt.Println(packet)
 		w.WritePacket(packet.Metadata().CaptureInfo, packet.Data())
+
+		// 获取抓到的包的数量
 		catcher.PacketCount++
+		StrBind.Set("Packet Number: " + strconv.Itoa(catcher.PacketCount))
 
 		select {
 		case <-stopCaptureChan:
